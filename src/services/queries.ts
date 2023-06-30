@@ -76,12 +76,6 @@ export const GET_ANIME_DETAIL = gql`
       bannerImage
       description
       genres
-      averageScore
-      popularity
-      episodes
-      duration
-      season
-      seasonYear
     }
   }
 `
