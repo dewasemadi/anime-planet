@@ -30,16 +30,17 @@ type TextFieldProps = {
   register?: any
   errors?: FieldErrors<FieldValues> | any
   value?: string
+  dataCy?: string
 } & JSX.IntrinsicElements['input']
 
 export function TextField(props: TextFieldProps) {
-  const { label, name, register, errors, value, ...rest } = props
+  const { label, name, register, errors, value, dataCy, ...rest } = props
   const error = errors?.[name]
 
   return (
     <Box width='100%'>
       <label htmlFor={name}>{label}</label>
-      <Input type='text' value={value} {...(register ? register(name) : {})} {...rest} />
+      <Input type='text' value={value} {...(register ? register(name) : {})} {...rest} data-cy={dataCy} />
       <Show when={error}>
         <Text fontSize={[12, 14, 14]} mt={1} style={{ marginLeft: '12px' }} color='danger.main'>
           {error?.message}

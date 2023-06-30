@@ -37,6 +37,7 @@ export function CollectionItem(props: CollectionItemProps) {
       borderRadius={4}
       isExist={isExist}
       onClick={onCardClick}
+      data-cy='collection-item-card'
       cursor={isExist || !onCardClick ? 'not-allowed' : 'pointer'}
       border={isSelected ? ' 1px solid #095ae5' : 'unset'}
       backgroundColor={isSelected ? 'rgba(9, 90, 229, 0.05)' : '#252833'}
@@ -57,7 +58,7 @@ export function CollectionItem(props: CollectionItemProps) {
           </Show>
         </Flex>
 
-        <Button variant='text' color='gray.500' fontSize={[12, 14, 16]} onClick={onDetailClick}>
+        <Button variant='text' color='gray.500' fontSize={[12, 14, 16]} onClick={onDetailClick} data-cy='detail-button'>
           Detail
         </Button>
       </Flex>

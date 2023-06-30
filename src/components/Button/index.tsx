@@ -139,6 +139,7 @@ export function FloatingButton(props: FloatingButtonProps) {
         onClick={onClick}
         borderRadius='50%'
         aria-label='button'
+        data-cy='floating-button'
         width={isMobile ? 45 : 55}
         height={isMobile ? 45 : 55}
       >

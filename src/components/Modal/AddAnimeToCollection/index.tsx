@@ -107,8 +107,10 @@ export function AddAnimeToCollectionModal(props: ModalProps) {
     try {
       await createCollection(data?.name)
       reset()
-    } catch (error) {
-      setToast({ isOpen: true, message: 'Failed to create collection', type: 'warning' })
+    } catch (error: any) {
+      const isNotUnique = error?.name === 'ConstraintError'
+      const message = isNotUnique ? 'Collection name already exist' : 'Failed to create collection'
+      setToast({ isOpen: true, message: message, type: isNotUnique ? 'warning' : 'error' })
     }
   }
 
@@ -116,9 +118,6 @@ export function AddAnimeToCollectionModal(props: ModalProps) {
     const animeData = selectedAnime || selectedAnimeList
 
     try {
-      const anime = selectedAnime ? [selectedAnime] : selectedAnimeList
-      const animeIds = anime.map((anime) => anime.id)
-
       const collectionIds = selectedCollection.map((anime) => anime.id)
       await addAnimeToCollection(collectionIds, animeData)
       setToast({ isOpen: true, message: 'Success add anime to collection', type: 'success' })
@@ -164,6 +163,7 @@ export function AddAnimeToCollectionModal(props: ModalProps) {
           value={search}
           placeholder='Type anime name here'
           onChange={(e) => setSearch(e.target.value)}
+          dataCy='search-anime-text-field'
         />
 
         <Show when={(data?.length === 0 || !data) && !loading}>
@@ -186,7 +186,7 @@ export function AddAnimeToCollectionModal(props: ModalProps) {
             <Text color='gray.300' fontSize={[12, 14, 14]}>
               Found {data?.length} anime
             </Text>
-            <Text color='gray.500' fontSize={[12, 14, 14]}>
+            <Text color='gray.500' fontSize={[12, 14, 14]} data-cy='selected-anime-text'>
               {selectedAnimeList?.length} anime selected
             </Text>
           </Flex>
@@ -219,7 +219,13 @@ export function AddAnimeToCollectionModal(props: ModalProps) {
                 </Text>
               </Button>
             </Show>
-            <Button onClick={() => setStep(STEP.SELECT_COLLECTION)} ml='auto' mt={18} isDisabled={isUnSelectAnime}>
+            <Button
+              ml='auto'
+              mt={18}
+              isDisabled={isUnSelectAnime}
+              data-cy='modal-button-next'
+              onClick={() => setStep(STEP.SELECT_COLLECTION)}
+            >
               Next
             </Button>
           </Show>
@@ -231,6 +237,7 @@ export function AddAnimeToCollectionModal(props: ModalProps) {
         <Flex alignItems='center' justifyContent='space-between'>
           <Button
             variant='text'
+            data-cy='create-collection-button'
             onClick={() => {
               setIsShowCreateCollection(!isShowCreateCollection)
               reset()
@@ -248,8 +255,19 @@ export function AddAnimeToCollectionModal(props: ModalProps) {
         <Show when={isShowCreateCollection}>
           <form onSubmit={handleSubmit(onCreate)}>
             <Flex gap={8} mt={18}>
-              <TextField placeholder='Collection Name' name='name' register={register} errors={errors} />
-              <Button type='submit' height='fit-content' style={{ paddingTop: '12px', paddingBottom: '12px' }}>
+              <TextField
+                name='name'
+                errors={errors}
+                register={register}
+                placeholder='Collection Name'
+                dataCy='collection-name-text-field'
+              />
+              <Button
+                type='submit'
+                height='fit-content'
+                data-cy='save-collection-button'
+                style={{ paddingTop: '12px', paddingBottom: '12px' }}
+              >
                 Save
               </Button>
             </Flex>
@@ -301,7 +319,11 @@ export function AddAnimeToCollectionModal(props: ModalProps) {
               <Button variant='secondary' onClick={selectedAnime ? onModalClose : () => setStep(STEP.SELECT_ANIME)}>
                 {selectedAnime ? 'Cancel' : 'Back'}
               </Button>
-              <Button onClick={onAddToCollection} isDisabled={isUnSelectCollection}>
+              <Button
+                onClick={onAddToCollection}
+                isDisabled={isUnSelectCollection}
+                data-cy='save-anime-to-collection-button'
+              >
                 Save
               </Button>
             </Flex>

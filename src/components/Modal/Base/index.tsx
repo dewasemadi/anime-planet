@@ -52,7 +52,7 @@ export function Modal(props: ModalProps) {
           minWidth={isMobile ? 'unset' : minWidth}
         >
           <Flex justifyContent='space-between' alignItems='center' width='100%' gap={16}>
-            <Text color='gray.200' fontWeight={600} fontSize={[16, 18, 20]}>
+            <Text color='gray.200' fontWeight={600} fontSize={[16, 18, 20]} data-cy='modal-title'>
               {title}
             </Text>
             <BaseButton onClick={onClose} aria-label='close'>

@@ -50,6 +50,7 @@ export function Pagination(props: PaginationProps) {
           disabled={isLoading}
           size={isMobile ? 'sm' : 'md'}
           minWidth={isMobile ? 'unset' : 90}
+          data-cy='next-button'
         >
           {next}
         </Button>

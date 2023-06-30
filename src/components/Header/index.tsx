@@ -83,7 +83,7 @@ export function Header() {
       <Flex maxWidth={1200} justifyContent='space-between' alignItems='center' m='auto'>
         <Flex alignItems='center' gap={24}>
           <Show when={isCollection}>
-            <BaseButton onClick={() => router.back()} aria-label='back'>
+            <BaseButton onClick={() => router.back()} aria-label='back' data-cy='back-button'>
               <BiArrowBack color='white' size={isMobile ? 18 : 24} />
             </BaseButton>
           </Show>
@@ -101,7 +101,11 @@ export function Header() {
             </TextWithEllipsis>
 
             <Show when={isCollection && !!collection}>
-              <BaseButton onClick={() => setIsShowModal((prev) => ({ ...prev, edit: true }))} aria-label='edit'>
+              <BaseButton
+                aria-label='edit'
+                data-cy='edit-button'
+                onClick={() => setIsShowModal((prev) => ({ ...prev, edit: true }))}
+              >
                 <AiOutlineEdit color='white' size={isMobile ? 18 : 24} />
               </BaseButton>
             </Show>
@@ -110,7 +114,12 @@ export function Header() {
 
         <Show when={!isCollection}>
           <Button onClick={() => router.push(ROUTES.COLLECTION)} variant='text'>
-            <Text color='gray.100' fontSize={[14, 16, 18]} style={{ textDecoration: 'underline' }}>
+            <Text
+              color='gray.100'
+              fontSize={[14, 16, 18]}
+              data-cy='my-collection-button'
+              style={{ textDecoration: 'underline' }}
+            >
               My Collection
             </Text>
           </Button>

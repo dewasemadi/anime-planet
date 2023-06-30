@@ -51,6 +51,7 @@ export function Card(props: CardProps) {
     <StyledBox
       maxWidth={width}
       cursor='pointer'
+      data-cy='anime-card'
       width={isMobile ? '100%' : 'unset'}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -62,6 +63,7 @@ export function Card(props: CardProps) {
           alt={title}
           sizes='100%'
           placeholder='blur'
+          data-cy='banner-image'
           onClick={onCardClick}
           blurDataURL='/images/placeholder.png'
           style={{
@@ -74,7 +76,13 @@ export function Card(props: CardProps) {
       </Box>
       <Box p={2} cursor='pointer'>
         <Flex justifyContent='space-between' alignItems='center' gap={8} cursor='pointer'>
-          <TextWithEllipsis color='gray.100' maxWidth={200} fontSize={[16, 18, 20]} fontWeight={600}>
+          <TextWithEllipsis
+            color='gray.100'
+            maxWidth={200}
+            fontWeight={600}
+            fontSize={[16, 18, 20]}
+            data-cy='anime-card-title'
+          >
             {title}
           </TextWithEllipsis>
 
@@ -86,8 +94,9 @@ export function Card(props: CardProps) {
 
           <Show when={isExistInCollection}>
             <BaseButton
-              onClick={!!onRemoveFromCollection ? onRemoveFromCollection : onAddToCollection}
               aria-label='button'
+              data-cy='remove-from-collection-button'
+              onClick={!!onRemoveFromCollection ? onRemoveFromCollection : onAddToCollection}
             >
               {isHome && <GoBookmarkFill color='white' size={isMobile ? 20 : 24} />}
               {!isHome && <RiDeleteBinLine color={theme.colors.danger.main} size={22} />}

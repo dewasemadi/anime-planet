@@ -52,7 +52,7 @@ export default function CollectionDetail() {
 
   return (
     <Container>
-      <Seo title={router.query?.id} />
+      <Seo title='My Collection' />
 
       <Show when={anime?.length === 0}>
         <Empty text='You don’t have any anime in this collection yet' />

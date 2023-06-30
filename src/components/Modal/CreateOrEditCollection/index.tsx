@@ -69,14 +69,25 @@ export function CreateOrEditCollectionModal(props: ModalProps) {
   }, [isOpen])
 
   return (
-    <ModalComponent {...props} title={selectedCollection ? 'Rename Collection' : 'Create Collection'} minWidth={500}>
+    <ModalComponent
+      {...props}
+      minWidth={500}
+      data-cy='modal-title'
+      title={selectedCollection ? 'Rename Collection' : 'Create Collection'}
+    >
       <form onSubmit={handleSubmit(selectedCollection ? onUpdate : onCreate)}>
-        <TextField placeholder='Collection name' name='name' register={register} errors={errors} />
+        <TextField
+          name='name'
+          errors={errors}
+          register={register}
+          placeholder='Collection name'
+          dataCy='collection-name-text-field'
+        />
         <Flex justifyContent='flex-end' gap={8} mt={32}>
           <Button variant='secondary' onClick={onClose}>
             Cancel
           </Button>
-          <Button variant='primary' type='submit'>
+          <Button variant='primary' type='submit' data-cy='save-collection-button'>
             Save
           </Button>
         </Flex>

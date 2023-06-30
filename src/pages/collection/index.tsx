@@ -49,7 +49,7 @@ export default function Collection() {
 
   return (
     <Container>
-      <Seo title='Anime Collection' />
+      <Seo title='My Collection' />
 
       <Box pt={32} pb={64}>
         <Show when={totalCollection === 0}>
@@ -58,6 +58,7 @@ export default function Collection() {
             button={
               <Button
                 mt={16}
+                data-cy='create-collection-button'
                 onClick={() => {
                   setSelectedCollection(null)
                   setIsShowModal((prev) => ({ ...prev, create: true }))
@@ -72,6 +73,7 @@ export default function Collection() {
         <Show when={totalCollection > 0}>
           <Flex alignItems='center' gap={14}>
             <Button
+              data-cy='create-collection-button'
               onClick={() => {
                 setSelectedCollection(null)
                 setIsShowModal((prev) => ({ ...prev, create: true }))

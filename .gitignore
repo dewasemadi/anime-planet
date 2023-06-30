@@ -41,3 +41,7 @@ next-env.d.ts
 /public/worker-*.js
 /public/worker-*.js.map
 /public/sw.js.map
+
+# cypress
+/cypress/videos
+/cypress/screenshots

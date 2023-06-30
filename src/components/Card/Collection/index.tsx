@@ -48,11 +48,13 @@ export function Card(props: CardProps) {
     {
       title: 'Rename',
       color: 'gray.100',
+      dataCy: 'rename-button',
       onClick: onEdit,
     },
     {
       title: 'Delete',
       color: 'danger.main',
+      dataCy: 'delete-button',
       onClick: onDelete,
     },
   ]
@@ -65,6 +67,7 @@ export function Card(props: CardProps) {
           sizes='100%'
           onClick={onClick}
           placeholder='blur'
+          data-cy='banner-image'
           alt={title || 'default'}
           blurDataURL='/images/placeholder.png'
           src={image || '/images/placeholder.png'}
@@ -79,7 +82,7 @@ export function Card(props: CardProps) {
 
       <Flex justifyContent='space-between' p={[12, 16, 20]} width='100%' cursor='pointer' onClick={onClick}>
         <Box cursor='pointer' onClick={onClick}>
-          <TextWithEllipsis color='white' fontSize={[16, 18, 20]} maxWidth={200}>
+          <TextWithEllipsis color='white' fontSize={[16, 18, 20]} maxWidth={200} data-cy='collection-name'>
             {title}
           </TextWithEllipsis>
           <Text color='gray.500' mt={2} fontSize={[12, 14, 16]}>
@@ -89,6 +92,7 @@ export function Card(props: CardProps) {
         <Box position='relative'>
           <BaseButton
             aria-label='menu'
+            data-cy='menu-button'
             onClick={(e) => {
               e.stopPropagation()
               setShowMenu(!showMenu)
@@ -108,13 +112,14 @@ export function Card(props: CardProps) {
               position='absolute'
               backgroundColor='#2D313A'
             >
-              {options.map(({ title, color, onClick }, index) => (
+              {options.map(({ title, color, onClick, dataCy }, index) => (
                 <StyledText
                   py={12}
                   px={16}
                   key={index}
                   color={color}
                   minWidth={120}
+                  data-cy={dataCy}
                   fontSize={[14, 14, 16]}
                   onClick={(e) => {
                     e.stopPropagation()

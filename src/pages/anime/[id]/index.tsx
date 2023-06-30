@@ -129,6 +129,7 @@ export default function Anime() {
                 placeholder='blur'
                 width={isMobile ? 200 : 250}
                 height={isMobile ? 300 : 350}
+                data-cy='anime-detail-cover-image'
                 alt={data?.title.romaji || 'cover image'}
                 blurDataURL={data?.bannerImage || '/images/placeholder.png'}
                 src={
@@ -153,7 +154,7 @@ export default function Anime() {
             <Box pt={isMobile ? 150 : 30} pr={isMobile ? 0 : 300} pb={32}>
               <Flex justifyContent='space-between'>
                 <Box>
-                  <Text fontSize={[20, 24, 28]} fontWeight='bold' color='gray.100'>
+                  <Text fontSize={[20, 24, 28]} fontWeight='bold' color='gray.100' data-cy='anime-detail-title'>
                     {data?.title.romaji}
                   </Text>
 
@@ -163,7 +164,7 @@ export default function Anime() {
                 </Box>
 
                 <Show when={true}>
-                  <BaseButton onClick={onBookmarkIconClick} aria-label='collection'>
+                  <BaseButton onClick={onBookmarkIconClick} aria-label='collection' data-cy='add-to-collection-icon'>
                     {isExistInCollection && <GoBookmarkFill color='white' size={isMobile ? 24 : 32} />}
                     {!isExistInCollection && <GoBookmark color='white' size={isMobile ? 24 : 32} />}
                   </BaseButton>
@@ -185,8 +186,9 @@ export default function Anime() {
                     px={3}
                     color='gray.500'
                     borderRadius={4}
-                    backgroundColor='#20222c'
                     fontSize={[12, 14, 14]}
+                    backgroundColor='#20222c'
+                    data-cy='anime-detail-genre'
                   >
                     {genre}
                   </Text>

@@ -21,7 +21,7 @@ export function ConfirmationModal(props: ConfirmationModalProps) {
         <Button variant='secondary' onClick={onClose}>
           Cancel
         </Button>
-        <Button variant='primary' onClick={onDone}>
+        <Button variant='primary' onClick={onDone} data-cy='yes-button'>
           Yes
         </Button>
       </Flex>

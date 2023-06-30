@@ -64,7 +64,7 @@ export function Toast() {
       >
         <Box width={5} backgroundColor={borderColor} />
         <Flex p={12} minWidth={isMobile ? 'unset' : 300} alignItems='center' justifyContent='space-between'>
-          <Text color='gray.900' fontSize={[12, 14, 16]} fontWeight={500}>
+          <Text color='gray.900' fontSize={[12, 14, 16]} fontWeight={500} data-cy='toast-text'>
             {message}
           </Text>
 

@@ -32,6 +32,7 @@ export function AnimeItem(props: CardProps) {
       mb={3}
       borderRadius={4}
       onClick={onClick}
+      data-cy='anime-item'
       border={isSelected ? '1px solid #095ae5' : 'unset'}
       backgroundColor={isSelected ? 'rgba(9, 90, 229, 0.05)' : '#16181f'}
     >
