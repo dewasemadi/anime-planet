@@ -77,7 +77,7 @@ export function Card(props: CardProps) {
             {title}
           </TextWithEllipsis>
 
-          <Show when={isHovered && !isExistInCollection && isHome}>
+          <Show when={(isHovered && !isExistInCollection && isHome) || (isMobile && !isExistInCollection)}>
             <BaseButton onClick={onAddToCollection} aria-label='collection'>
               <GoBookmark color='white' size={isMobile ? 20 : 24} />
             </BaseButton>

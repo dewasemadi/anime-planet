@@ -14,7 +14,9 @@ export function ConfirmationModal(props: ConfirmationModalProps) {
 
   return (
     <Modal isOpen={isOpen} title={title} onClose={onClose} width={500} minWidth='unset'>
-      <Text color='gray.100'>{description}</Text>
+      <Text color='gray.100' fontSize={[12, 14, 16]}>
+        {description}
+      </Text>
       <Flex justifyContent='flex-end' gap={8} mt={32}>
         <Button variant='secondary' onClick={onClose}>
           Cancel

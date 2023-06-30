@@ -171,23 +171,25 @@ export function AddAnimeToCollectionModal(props: ModalProps) {
           <Empty text='No anime found' mt={20} height='fit-content' />
         </Show>
 
-        <Box mt={18} maxHeight={isMobile ? 300 : 500} overflowY='auto'>
-          <Show when={loading}>
+        <Show when={loading}>
+          <Box mt={18}>
             {Array.from({ length: 3 }).map((_, index) => (
               <AnimeItemSkeleton key={index} />
             ))}
-          </Show>
+          </Box>
+        </Show>
 
-          <Show when={!!data && data?.length > 0}>
-            <Flex alignItems='center' justifyContent='space-between'>
-              <Text color='gray.300' mb={18}>
-                Found {data?.length} anime
-              </Text>
-              <Text color='gray.500' fontSize={[12, 14, 14]}>
-                {selectedAnimeList?.length} anime selected
-              </Text>
-            </Flex>
+        <Show when={!!data && data?.length > 0}>
+          <Flex alignItems='center' justifyContent='space-between' my={18}>
+            <Text color='gray.300' fontSize={[12, 14, 14]}>
+              Found {data?.length} anime
+            </Text>
+            <Text color='gray.500' fontSize={[12, 14, 14]}>
+              {selectedAnimeList?.length} anime selected
+            </Text>
+          </Flex>
 
+          <Box mt={18} maxHeight={isMobile ? 300 : 500} overflowY='auto'>
             {data?.map((item, index: number) => (
               <AnimeItem
                 key={index}
@@ -198,8 +200,8 @@ export function AddAnimeToCollectionModal(props: ModalProps) {
                 image={isMobile ? item.coverImage.medium : item.coverImage.large}
               />
             ))}
-          </Show>
-        </Box>
+          </Box>
+        </Show>
 
         <Show when={(!!data && data?.length > 0) || selectedAnimeList?.length > 0}>
           <Button onClick={() => setStep(STEP.SELECT_COLLECTION)} ml='auto' mt={18}>

@@ -47,7 +47,9 @@ export function CreateOrEditCollectionModal(props: ModalProps) {
       onResetState()
 
       const isCollection = router.pathname?.includes(ROUTES.COLLECTION)
-      if (isCollection) router.replace(ROUTES.COLLECTION_DETAIL(selectedCollection.id))
+      const isIdExist = router.query?.id
+
+      if (isCollection && isIdExist) router.replace(ROUTES.COLLECTION_DETAIL(selectedCollection.id))
     } catch (error) {
       setToast({ isOpen: true, message: 'Failed to rename collection', type: 'error' })
     }

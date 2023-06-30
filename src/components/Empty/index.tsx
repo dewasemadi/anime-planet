@@ -20,7 +20,7 @@ export function Empty(props: EmptyProps) {
       mt={mt || [-50, -58, -68]}
     >
       <Image alt='empty' src='/images/empty.svg' width={200} height={200} />
-      <Text color='gray.300' mt={4} textAlign='center'>
+      <Text color='gray.300' mt={4} textAlign='center' fontSize={[12, 14, 16]}>
         {text}
       </Text>
       {!!button && button}
