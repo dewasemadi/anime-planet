@@ -3,15 +3,15 @@ import { useState, useEffect } from 'react'
 import { ROUTES } from '@/constants/routes'
 import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
+import { Collection } from '@/database/db'
 import useDeviceType from '@/hooks/useDeviceType'
-import { GoBookmark, GoBookmarkFill } from 'react-icons/go'
 import { useLiveQuery } from 'dexie-react-hooks'
 import { useGlobalContext } from '@/context/globalContext'
-import { Overlay, Flex, BaseButton, AddAnimeToCollectionModal } from '@/components'
+import { GoBookmark, GoBookmarkFill } from 'react-icons/go'
+import { Overlay, Flex, BaseButton, AddAnimeToCollectionModal, Empty } from '@/components'
 import { Anime, AnimeDetailQueryResult, GET_ANIME_DETAIL } from '@/services/queries'
-import { Container, Box, Seo, Loading, Show, Text, CollectionInfoModal } from '@/components'
+import { Container, Box, Seo, Loading, Show, Text, CollectionInfoModal, Button } from '@/components'
 import { getAllCollectionByGivenAnimeId, getIsAnimeExistInCollection, getCollections } from '@/database/controller'
-import { Collection } from '@/database/db'
 
 export default function Anime() {
   const router = useRouter()
@@ -95,6 +95,16 @@ export default function Anime() {
       <Seo title={data?.title.romaji} />
 
       <Box>
+        <Show when={!!error}>
+          <Empty
+            text='Something went wrong. Check your internet connection and try again.'
+            button={
+              <Button onClick={() => router.reload()} mt={4}>
+                Reload
+              </Button>
+            }
+          />
+        </Show>
         <Show when={loading}>
           <Loading />
         </Show>
