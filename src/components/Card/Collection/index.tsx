@@ -114,7 +114,7 @@ export function Card(props: CardProps) {
                   key={index}
                   color={color}
                   minWidth={120}
-                  fontSize={[12, 14, 16]}
+                  fontSize={[14, 14, 16]}
                   onClick={(e) => {
                     e.stopPropagation()
                     onClick()
