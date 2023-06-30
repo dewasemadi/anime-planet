@@ -38,6 +38,7 @@ export function AnimeItem(props: CardProps) {
       <Box width={isMobile ? 80 : 120} height={120} cursor='pointer' position='relative'>
         <Image
           fill
+          sizes='100%'
           alt={title}
           placeholder='blur'
           blurDataURL='/images/placeholder.png'

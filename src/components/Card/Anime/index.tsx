@@ -60,6 +60,7 @@ export function Card(props: CardProps) {
           fill
           src={image}
           alt={title}
+          sizes='100%'
           placeholder='blur'
           onClick={onCardClick}
           blurDataURL='/images/placeholder.png'

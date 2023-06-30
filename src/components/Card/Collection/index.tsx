@@ -62,6 +62,7 @@ export function Card(props: CardProps) {
       <Box width={isMobile ? 120 : 120} cursor='pointer' position='relative' height={120}>
         <Image
           fill
+          sizes='100%'
           onClick={onClick}
           placeholder='blur'
           alt={title || 'default'}
