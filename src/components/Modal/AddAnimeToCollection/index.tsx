@@ -39,10 +39,12 @@ export function AddAnimeToCollectionModal(props: ModalProps) {
   const [selectedCollection, setSelectedCollection] = useState<Collection[]>([])
   const [step, setStep] = useState(STEP.SELECT_ANIME)
 
-  const [isShowCreateCollection, setIsShowCreateCollection] = useState(false)
-  const isUnSelect = selectedCollection?.length === 0
-
   const [selectedAnimeList, setSelectedAnimeList] = useState<Anime[]>([])
+  const [isShowCreateCollection, setIsShowCreateCollection] = useState(false)
+
+  const isUnSelectCollection = selectedCollection?.length === 0
+  const isUnSelectAnime = selectedAnimeList?.length === 0
+
   const [search, setSearch] = useState<string>('')
   const debounceSearch = useDebounce(search, 500)
 
@@ -189,7 +191,7 @@ export function AddAnimeToCollectionModal(props: ModalProps) {
             </Text>
           </Flex>
 
-          <Box mt={18} maxHeight={isMobile ? 300 : 500} overflowY='auto'>
+          <Box mt={18} maxHeight={isMobile ? 300 : 450} overflowY='auto'>
             {data?.map((item, index: number) => (
               <AnimeItem
                 key={index}
@@ -203,11 +205,25 @@ export function AddAnimeToCollectionModal(props: ModalProps) {
           </Box>
         </Show>
 
-        <Show when={(!!data && data?.length > 0) || selectedAnimeList?.length > 0}>
-          <Button onClick={() => setStep(STEP.SELECT_COLLECTION)} ml='auto' mt={18}>
-            Next
-          </Button>
-        </Show>
+        <Flex justifyContent={isUnSelectAnime ? 'space-between' : 'flex-end'} alignItems='center' gap={8} mt={18}>
+          <Show when={(!!data && data?.length > 0) || selectedAnimeList?.length > 0}>
+            <Show when={isUnSelectAnime}>
+              <Text color='gray.500' fontSize={[12, 14, 14]}>
+                Select at least 1 collection
+              </Text>
+            </Show>
+            <Show when={!isUnSelectAnime}>
+              <Button variant='text' onClick={() => setSelectedAnimeList([])} style={{ marginRight: 'auto' }}>
+                <Text color='gray.500' fontSize={[12, 14, 14]} style={{ textDecoration: 'underline' }}>
+                  Unselect all
+                </Text>
+              </Button>
+            </Show>
+            <Button onClick={() => setStep(STEP.SELECT_COLLECTION)} ml='auto' mt={18} isDisabled={isUnSelectAnime}>
+              Next
+            </Button>
+          </Show>
+        </Flex>
       </Show>
 
       {/* select collection step */}
@@ -263,13 +279,18 @@ export function AddAnimeToCollectionModal(props: ModalProps) {
             ))}
           </Box>
 
-          <Flex justifyContent={isUnSelect ? 'space-between' : 'flex-end'} alignItems='center' gap={8} mt={18}>
-            <Show when={isUnSelect}>
+          <Flex
+            justifyContent={isUnSelectCollection ? 'space-between' : 'flex-end'}
+            alignItems='center'
+            gap={8}
+            mt={18}
+          >
+            <Show when={isUnSelectCollection}>
               <Text color='gray.500' fontSize={[12, 14, 14]}>
                 Select at least 1 collection
               </Text>
             </Show>
-            <Show when={!isUnSelect}>
+            <Show when={!isUnSelectCollection}>
               <Button variant='text' onClick={() => setSelectedCollection([])} style={{ marginRight: 'auto' }}>
                 <Text color='gray.500' fontSize={[12, 14, 14]} style={{ textDecoration: 'underline' }}>
                   Unselect all
@@ -280,7 +301,7 @@ export function AddAnimeToCollectionModal(props: ModalProps) {
               <Button variant='secondary' onClick={selectedAnime ? onModalClose : () => setStep(STEP.SELECT_ANIME)}>
                 {selectedAnime ? 'Cancel' : 'Back'}
               </Button>
-              <Button onClick={onAddToCollection} isDisabled={isUnSelect}>
+              <Button onClick={onAddToCollection} isDisabled={isUnSelectCollection}>
                 Save
               </Button>
             </Flex>

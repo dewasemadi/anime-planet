@@ -6,7 +6,6 @@ import { Box, BaseButton, Text, BaseProps } from '@/components/Core'
 
 const StyledButton = styled(BaseButton)<any>`
   transition: all 0.2s ease-in-out;
-
   cursor: ${({ isDisabled }: { isDisabled: boolean }) => (isDisabled ? 'not-allowed' : 'pointer')};
 
   :hover {
